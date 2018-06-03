@@ -1,6 +1,6 @@
 # Reading - Redux
 
-It is a study project for redux with react.
+It is a study project for react with redux.
 
 ## Project developed with:
 * Node,
