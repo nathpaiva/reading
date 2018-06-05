@@ -1,41 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { loadCategories } from './api';
 
 class App extends Component {
-
   state = {
-    categories: [],
     posts: [],
   }
 
-  componentWillMount() {
-    console.log("veio");
-    const url = 'http://localhost:3001';
-    const headers = {
-      'Authorization': 'whatever-you-want',
-      'Content-Type': 'application/json'
-    }
-
-    fetch(`${url}/categories`, {
-      headers
-    })
-      .then(data => data.json())
-      .then(data => {
-        console.log("data", data);
-
-        this.setState({categories: data.categories});
-      })
-      .catch(error => console.log("error", error))
-
-    fetch(`${url}/react/posts`, {
-      headers
-    })
-      .then(data => data.json())
-      .then(posts => {
-        console.log("posts", posts);
-
-        this.setState({posts});
-      })
-      .catch(error => console.log("error", error))
+  componentDidMount() {
+    this.props.load();
   }
 
   render() {
@@ -43,7 +17,7 @@ class App extends Component {
       <div className="App">
         <ul>
           <li><strong>Lista de categorias</strong></li>
-          {this.state.categories.map((categoy, idx) => (<li key={`${categoy.name}-${idx}`}>{categoy.name}</li>) )}
+          {this.props.categories.map((categoy, idx) => (<li key={`${categoy.name}-${idx}`}>{categoy.name}</li>) )}
         </ul>
         <ul>
           <li><strong>Lista de postagens</strong> - controle ordenação <a>Maior</a> <a>Menor</a></li>
@@ -62,4 +36,21 @@ class App extends Component {
   }
 }
 
-export default App;
+// mapStateToProps
+// mapDispatchToProps
+function mapStateToProps(categories) {
+  return {
+    categories
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    load: () => {
+      dispatch(loadCategories())
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
