@@ -1,4 +1,4 @@
-import { listCategoies } from '../actions';
+import { listCategoies, listPosts } from '../actions';
 
 const url = 'http://localhost:3001';
 const headers = {
@@ -6,26 +6,18 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-const getCategories = () => fetch(`${url}/categories`, { headers })
+const fetchCategories = () => fetch(`${url}/categories`, { headers })
   .then(res => res.json())
   .then(data => data);
 
-export function loadCategories() {
-  return dispatch => getCategories().then(data => dispatch(listCategoies(data.categories)))
+export function getCategories() {
+  return dispatch => fetchCategories().then(data => dispatch(listCategoies(data.categories)))
 }
 
+const fetchPosts = () => fetch(`${url}/react/posts`, { headers })
+  .then(res => res.json())
+  .then(data => data);
 
-// export function loadPostas() {
-//   return (dispatch) => {
-//     fetch(`${url}/react/posts`, {
-//       headers
-//     })
-//       .then(data => data.json())
-//       .then(posts => {
-//         console.log("posts", posts);
-
-//         // this.setState({posts});
-//       })
-//       .catch(error => console.log("error", error))
-//   }
-// }
+export function getPosts() {
+  return dispatch => fetchPosts().then(posts => dispatch(listPosts(posts)))
+}

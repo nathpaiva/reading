@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { loadCategories } from './api';
+import { getCategories, getPosts } from './api';
 
 class App extends Component {
   state = {
@@ -9,7 +9,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.load();
+    this.props.loadCategoies();
+    this.props.loadPosts();
   }
 
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
         </ul>
         <ul>
           <li><strong>Lista de postagens</strong> - controle ordenação <a>Maior</a> <a>Menor</a></li>
-          {this.state.posts.map(post => (
+          {this.props.posts.map(post => (
             <li key={post.id}>
               <div>Autor: {post.author}</div>
               <div>Título: {post.title}</div>
@@ -36,21 +37,22 @@ class App extends Component {
   }
 }
 
-// mapStateToProps
-// mapDispatchToProps
-function mapStateToProps(categories) {
+function mapStateToProps({categories, posts}) {
   return {
-    categories
+    categories,
+    posts
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    load: () => {
-      dispatch(loadCategories())
+    loadCategoies: () => {
+      dispatch(getCategories())
+    },
+    loadPosts: () => {
+      dispatch(getPosts())
     }
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
