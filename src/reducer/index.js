@@ -13,7 +13,20 @@ function categories(state = [], action) {
 function posts(state = [], action) {
   switch(action.type) {
     case LIST_POSTS:
-      return action.posts;
+      const posts = action.posts;
+
+      const voteScoreSorted = posts.sort((a, b) => {
+        if (a.voteScore > b.voteScore) {
+          return 1;
+        }
+        if (a.voteScore < b.voteScore) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+
+      return voteScoreSorted;
     default:
       return state;
   }

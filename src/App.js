@@ -1,38 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import history from './components/history';
+import Home from './components/Home';
+import Category from './components/Category'
 
 import { getCategories, getPosts } from './api';
 
 class App extends Component {
-  state = {
-    posts: [],
-  }
 
   componentDidMount() {
     this.props.loadCategoies();
     this.props.loadPosts();
   }
 
+  orderBy = (order) => {
+    console.log("this.props.posts", this.props.posts);
+    const newPost = this.props.posts.sort((a, b) => {
+      if (a.voteScore < b.voteScore) {
+        return 1;
+      }
+      if (a.voteScore > b.voteScore) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    console.log("veio para ordenar", order);
+    // console.log("newPost", newPost);
+  }
+
   render() {
     return (
-      <div className="App">
-        <ul>
-          <li><strong>Lista de categorias</strong></li>
-          {this.props.categories.map((categoy, idx) => (<li key={`${categoy.name}-${idx}`}>{categoy.name}</li>) )}
-        </ul>
-        <ul>
-          <li><strong>Lista de postagens</strong> - controle ordenação <a>Maior</a> <a>Menor</a></li>
-          {this.props.posts.map(post => (
-            <li key={post.id}>
-              <div>Autor: {post.author}</div>
-              <div>Título: {post.title}</div>
-              <div>Descrição: {post.body}</div>
-              <div>Comentários: {post.commentCount}</div>
-            </li>
-          ))}
-          <li><button>Nova postagem</button></li>
-        </ul>
-      </div>
+      <Router>
+        <div className="App">
+          <ul>
+            <Link to='/'>Home</Link>
+            <Link to='/categoria'>Categoria</Link>
+          </ul>
+
+          <Route exact path='/' render={ () =>
+              <Home categories={this.props.categories} posts={this.props.posts} orderBy={(order) => this.orderBy(order)} />
+            } history={history} />
+          <Route exact path="/categoria" component={Category} />
+        </div>
+      </Router>
     );
   }
 }

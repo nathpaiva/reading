@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import App from './App';
 import './assets/index.css';
+import './assets/project.css';
 
 const logger = store => next => action => {
   console.group(action.type)
@@ -21,6 +22,7 @@ const compoeseEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducer, compoeseEnhancers(
   applyMiddleware(thunk)
 ));
+
 
 ReactDOM.render(
   <Provider store={store}>
