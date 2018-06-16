@@ -1,9 +1,46 @@
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: Roboto;
 }
 
+#root,
+.App {
+  height: 100%;
+}
+
+.container {
+  height: calc(100% - 64px - 56px);
+}
+
 .navigation {
   width: 100%;
 }
+
+.list-category {
+  display: block;
+  margin: 0 0 0 5px;
+  padding: 0;
+}
+
+.list-category li {
+  list-style: none;
+  display: inline-block;
+}
+
+.list-category li a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.list-category li a:hover {
+  text-decoration: underline;
+}
+

@@ -64,11 +64,21 @@ class App extends Component {
             </Toolbar>
           </AppBar>
 
-          <Route exact path='/' render={ () =>
-              <Home categories={this.props.categories} posts={this.props.posts}
-                orderBy={(order) => this.orderBy(order)} />
-            } history={history} />
-          <Route exact path="/categoria/:id?" component={Category} />
+          <div className='container'>
+            <ul className='list-category'>
+              {this.props.categories.map((category, idx) => (
+                <li key={`${category.name}-${idx}`}>
+                {console.log("`categoria/${category.path}`", `categoria/${category.path}`)}
+                  <Link to={`categoria/${category.path}`}>{category.name}</Link>
+                </li>
+              ))}
+            </ul>
+
+            <Route exact path='/' render={ () =>
+                <Home posts={this.props.posts} orderBy={(order) => this.orderBy(order)} />
+              } history={history} />
+            <Route exact path="/categoria/:id?" component={Category} />
+          </div>
 
           <BottomNavigation value={value} onChange={this.handleChange} className='navigation' showLabels>
             <BottomNavigationAction label="Home" value="home" component={Link} to="/"
