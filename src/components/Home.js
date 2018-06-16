@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = ({ categories, posts, orderBy }) => {
   return (
     <div>
       <ul>
-        <li><strong>Lista de categorias</strong></li>
-        {categories.map((categoy, idx) => (<li key={`${categoy.name}-${idx}`}>{categoy.name}</li>) )}
+        {categories.map((category, idx) => (
+          <li key={`${category.name}-${idx}`}>
+            {console.log(category)}
+            <Link to='/'>{category.name}</Link>
+          </li>
+        ))}
       </ul>
       <ul>
         <li><strong>Lista de postagens</strong> - controle ordenação <button onClick={() => orderBy(1)}>Maior</button> <button onClick={() => orderBy(-1)}>Menor</button></li>
