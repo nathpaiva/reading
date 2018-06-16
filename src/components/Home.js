@@ -7,8 +7,7 @@ const Home = ({ categories, posts, orderBy }) => {
       <ul>
         {categories.map((category, idx) => (
           <li key={`${category.name}-${idx}`}>
-            {console.log(category)}
-            <Link to='/'>{category.name}</Link>
+            <Link to={`categoria/${category.path}`}>{category.name}</Link>
           </li>
         ))}
       </ul>
@@ -20,6 +19,7 @@ const Home = ({ categories, posts, orderBy }) => {
             <div>Título: {post.title}</div>
             <div>Descrição: {post.body}</div>
             <div>Comentários: {post.commentCount}</div>
+            <Link to={`post/${post.id}`}>Ver mais</Link>
           </li>
         ))}
       </ul>

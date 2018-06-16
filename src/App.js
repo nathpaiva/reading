@@ -68,7 +68,7 @@ class App extends Component {
               <Home categories={this.props.categories} posts={this.props.posts}
                 orderBy={(order) => this.orderBy(order)} />
             } history={history} />
-          <Route exact path="/categoria" component={Category} />
+          <Route exact path="/categoria/:id?" component={Category} />
 
           <BottomNavigation value={value} onChange={this.handleChange} className='navigation' showLabels>
             <BottomNavigationAction label="Home" value="home" component={Link} to="/"
