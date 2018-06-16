@@ -15,9 +15,8 @@
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
-    "material-ui": "^1.0.0-beta.33",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.1",
@@ -31,6 +30,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@material-ui/core": "^1.2.1",
+    "@material-ui/icons": "^1.1.0",
     "moment": "^2.22.2",
     "react-router": "^4.2.0",
     "redux-thunk": "^2.3.0",

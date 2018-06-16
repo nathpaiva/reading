@@ -17,7 +17,6 @@ const Home = ({ categories, posts, orderBy }) => {
             <div>Comentários: {post.commentCount}</div>
           </li>
         ))}
-        <li><button>Nova postagem</button></li>
       </ul>
     </div>
   );
