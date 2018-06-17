@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
 const Home = ({ posts, orderBy }) => {
   return (
-    <ul>
-      <li><strong>Lista de postagens</strong> - controle ordenação <button onClick={() => orderBy(1)}>Maior</button> <button onClick={() => orderBy(-1)}>Menor</button></li>
+    <ul className='posts'>
+      <li className='posts__controll'>
+        <ArrowDropUpIcon onClick={() => orderBy(1)} />
+        <ArrowDropDownIcon onClick={() => orderBy(-1)} />
+      </li>
+
       {posts.map(post => (
         <li key={post.id}>
           <div>Autor: {post.author}</div>

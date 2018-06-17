@@ -68,8 +68,7 @@ class App extends Component {
             <ul className='list-category'>
               {this.props.categories.map((category, idx) => (
                 <li key={`${category.name}-${idx}`}>
-                {console.log("`categoria/${category.path}`", `categoria/${category.path}`)}
-                  <Link to={`categoria/${category.path}`}>{category.name}</Link>
+                  <Link to={`/categoria/${category.path}`}>{category.name}</Link>
                 </li>
               ))}
             </ul>

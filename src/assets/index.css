@@ -44,3 +44,15 @@ body {
   text-decoration: underline;
 }
 
+.posts {
+  margin: 0;
+  padding: 0 0 0 25px;
+}
+
+.posts li {
+  list-style: none;
+}
+
+.posts__controll {
+  margin: 0 0 10px;
+}
