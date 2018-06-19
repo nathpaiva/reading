@@ -11,12 +11,4 @@ class Category extends Component {
   }
 }
 
-// const Category = ({match}) => {
-//   return (
-//     <div>
-//       Pagina de categoria
-//     </div>
-//   );
-// }
-
 export default Category;
