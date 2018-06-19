@@ -1,28 +1,70 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
+import { getPosts } from '../api';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-const Home = ({ posts, orderBy }) => {
-  return (
-    <ul className='posts'>
-      <li className='posts__controll'>
-        <ArrowDropUpIcon onClick={() => orderBy(1)} />
-        <ArrowDropDownIcon onClick={() => orderBy(-1)} />
-      </li>
+class Home extends Component {
 
-      {posts.map(post => (
-        <li key={post.id}>
-          <div>Autor: {post.author}</div>
-          <div>Título: {post.title}</div>
-          <div>Descrição: {post.body}</div>
-          <div>Comentários: {post.commentCount}</div>
-          <Link to={`post/${post.id}`}>Ver mais</Link>
+  componentDidMount() {
+    this.props.loadPosts();
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  orderBy = (order) => {
+    const newPost = this.props.posts.sort((a, b) => {
+      if (a.voteScore < b.voteScore) {
+        return 1;
+      }
+      if (a.voteScore > b.voteScore) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log("veio para ordenar", order);
+  }
+
+  render() {
+    return (
+      <ul className='posts'>
+        <li className='posts__controll'>
+          <ArrowDropUpIcon onClick={() => this.orderBy(1)} />
+          <ArrowDropDownIcon onClick={() => this.orderBy(-1)} />
         </li>
-      ))}
-    </ul>
-  );
+
+        {this.props.posts.map(post => (
+          <li key={post.id}>
+            <div>Autor: {post.author}</div>
+            <div>Título: {post.title}</div>
+            <div>Descrição: {post.body}</div>
+            <div>Comentários: {post.commentCount}</div>
+            <Link to={`post/${post.id}`}>Ver mais</Link>
+          </li>
+        ))}
+      </ul>
+    );
+  }
 }
 
-export default Home;
+function mapStateToProps({categories, posts}) {
+  return {
+    categories,
+    posts
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadPosts: () => {
+      dispatch(getPosts())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
