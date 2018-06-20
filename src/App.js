@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link, withRouter } from "react-router-dom";
+import { Route, Link, withRouter, Switch } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
@@ -29,10 +28,10 @@ class App extends Component {
     const { value } = this.state;
 
     return (
-      <div className="App">
-        <AppBar position="static" color="primary">
+      <div className='App'>
+        <AppBar position='static' color='primary'>
           <Toolbar>
-            <Typography variant="title" color="inherit">
+            <Typography variant='title' color='inherit'>
               Reading App
             </Typography>
           </Toolbar>
@@ -40,8 +39,10 @@ class App extends Component {
 
         <div className='container'>
           <MenuCategory categories={this.props.categories} />
-          <Route exact path='/' component={Home} />
-          <Route exact path="/categoria/:id?" component={Category} />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path="/categoria/:id?" component={Category} />
+          </Switch>
         </div>
 
         <BottomNavigation value={value} onChange={this.handleChange} className='navigation' showLabels>

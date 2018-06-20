@@ -14,10 +14,18 @@ export function getCategories() {
   return dispatch => fetchCategories().then(data => dispatch(listCategoies(data.categories)))
 }
 
-const fetchPosts = () => fetch(`${url}/react/posts`, { headers })
+const fetchPosts = () => fetch(`${url}/posts`, { headers })
   .then(res => res.json())
   .then(data => data);
 
 export function getPosts() {
   return dispatch => fetchPosts().then(posts => dispatch(listPosts(posts)))
+}
+
+const fetchCategoryById = (id) => fetch(`${url}/${id}/posts`, { headers })
+  .then(res => res.json())
+  .then(data => data);
+
+export function getCategoryById(id) {
+  return dispatch => fetchCategoryById(id).then(posts => dispatch(listPosts(posts)))
 }

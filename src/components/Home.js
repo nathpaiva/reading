@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Link, withRouter } from 'react-router-dom';
-
-import { getPosts } from '../api';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
+import { getPosts } from '../api';
 
 class Home extends Component {
 
@@ -43,6 +42,7 @@ class Home extends Component {
             <div>Autor: {post.author}</div>
             <div>Título: {post.title}</div>
             <div>Descrição: {post.body}</div>
+            <div>Category: {post.category}</div>
             <div>Comentários: {post.commentCount}</div>
             <Link to={`post/${post.id}`}>Ver mais</Link>
           </li>

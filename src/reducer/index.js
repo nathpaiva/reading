@@ -26,7 +26,7 @@ function posts(state = [], action) {
         return 0;
       });
 
-      return voteScoreSorted;
+      return posts;
     default:
       return state;
   }
