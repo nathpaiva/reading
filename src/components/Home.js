@@ -18,23 +18,23 @@ class Home extends Component {
 
   orderBy = (order) => {
     const newPost = this.props.posts.sort((a, b) => {
-      if (a.voteScore < b.voteScore) {
-        return 1;
+      if (order === 'bigger') {
+        return b.voteScore - a.voteScore
       }
-      if (a.voteScore > b.voteScore) {
-        return -1;
-      }
-      return 0;
+
+      return a.voteScore - b.voteScore
     });
-    console.log("veio para ordenar", order);
+
+
+    this.setState({posts: newPost});
   }
 
   render() {
     return (
       <ul className='posts'>
         <li className='posts__controll'>
-          <ArrowDropUpIcon onClick={() => this.orderBy(1)} />
-          <ArrowDropDownIcon onClick={() => this.orderBy(-1)} />
+          <ArrowDropUpIcon onClick={() => this.orderBy('bigger')} />
+          <ArrowDropDownIcon onClick={() => this.orderBy('smaller')} />
         </li>
 
         {this.props.posts.map(post => (
