@@ -16,13 +16,13 @@ class Home extends Component {
     this.setState({ value });
   };
 
-  orderBy = (order) => {
+  orderBy = (order, keySort) => {
     const newPost = this.props.posts.sort((a, b) => {
       if (order === 'bigger') {
-        return b.voteScore - a.voteScore
+        return b[keySort] - a[keySort]
       }
 
-      return a.voteScore - b.voteScore
+      return a[keySort] - b[keySort]
     });
 
 
@@ -33,8 +33,8 @@ class Home extends Component {
     return (
       <ul className='posts'>
         <li className='posts__controll'>
-          <ArrowDropUpIcon onClick={() => this.orderBy('bigger')} />
-          <ArrowDropDownIcon onClick={() => this.orderBy('smaller')} />
+          <ArrowDropUpIcon onClick={() => this.orderBy('bigger', 'voteScore')} />
+          <ArrowDropDownIcon onClick={() => this.orderBy('smaller', 'voteScore')} />
         </li>
 
         {this.props.posts.map(post => (
