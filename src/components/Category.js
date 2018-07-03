@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 
 import { getCategoryById } from '../api';
 
@@ -26,7 +26,7 @@ class Category extends Component {
             <div>Descrição: {post.body}</div>
             <div>Category: {post.category}</div>
             <div>Comentários: {post.commentCount}</div>
-            <a to={`post/${post.id}`}>Ver mais</a>
+            <Link to={`/post/${post.id}`}>Ver mais</Link>
           </li>
         ))}
       </div>

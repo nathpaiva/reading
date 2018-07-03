@@ -1,31 +1,31 @@
-import { listCategoies, listPosts } from '../actions';
+import { listCategoies, listPosts, commentsById, postById } from '../actions';
 
 const url = 'http://localhost:3001';
 const headers = {
   'Authorization': 'whatever-you-want',
   'Content-Type': 'application/json'
-}
+};
 
-const fetchCategories = () => fetch(`${url}/categories`, { headers })
+const fetchAPI = (url) => fetch(url, { headers })
   .then(res => res.json())
   .then(data => data);
 
 export function getCategories() {
-  return dispatch => fetchCategories().then(data => dispatch(listCategoies(data.categories)))
+  return dispatch => fetchAPI(`${url}/categories`).then(data => dispatch(listCategoies(data.categories)))
 }
-
-const fetchPosts = () => fetch(`${url}/posts`, { headers })
-  .then(res => res.json())
-  .then(data => data);
 
 export function getPosts() {
-  return dispatch => fetchPosts().then(posts => dispatch(listPosts(posts)))
+  return dispatch => fetchAPI(`${url}/posts`).then(posts => dispatch(listPosts(posts)))
 }
 
-const fetchCategoryById = (id) => fetch(`${url}/${id}/posts`, { headers })
-  .then(res => res.json())
-  .then(data => data);
-
 export function getCategoryById(id) {
-  return dispatch => fetchCategoryById(id).then(posts => dispatch(listPosts(posts)))
+  return dispatch => fetchAPI(`${url}/${id}/posts`).then(posts => dispatch(listPosts(posts)))
+}
+
+export function getCommentsById(id) {
+  return dispatch => fetchAPI(`${url}/posts/${id}/comments`).then(posts => dispatch(commentsById(posts)))
+}
+
+export function getPostById(id) {
+  return dispatch => fetchAPI(`${url}/posts/${id}`).then(posts => dispatch(postById(posts)))
 }

@@ -8,6 +8,11 @@ body {
   font-family: Roboto;
 }
 
+li {
+  list-style: none;
+  margin-left: 10px;
+}
+
 #root,
 .App {
   height: 100%;

@@ -7,13 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
-import ListIcon from '@material-ui/icons/List';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import MenuCategory from './components/MenuCategory';
 import Home from './components/Home';
 import Category from './components/Category';
 import { getCategories } from './api';
+import AddPost from './components/AddPost';
+import Comments from './components/Comments';
 
 class App extends Component {
   state = {
@@ -42,15 +43,15 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path="/categoria/:id?" component={Category} />
+            <Route exact path="/add-post" component={AddPost} />
+            <Route exact path="/post/:id" component={Comments} />
           </Switch>
         </div>
 
         <BottomNavigation value={value} onChange={this.handleChange} className='navigation' showLabels>
           <BottomNavigationAction label="Home" value="home" component={Link} to="/"
             icon={<HomeIcon />} />
-          <BottomNavigationAction label="Category" value="category" component={Link}
-            to="/categoria" icon={<ListIcon />} />
-          <BottomNavigationAction label="New Post" value="New Post"
+          <BottomNavigationAction label="New Post" value="New Post" component={Link} to="/add-post"
             icon={<AddCircleOutlineIcon />} />
         </BottomNavigation>
       </div>

@@ -53,6 +53,8 @@ class Home extends Component {
 }
 
 function mapStateToProps({categories, posts}) {
+  console.log('​mapStateToProps -> posts', posts);
+  console.log("categories", categories);
   return {
     categories,
     posts
