@@ -19,7 +19,7 @@ class Home extends Component {
   };
 
   orderBy = (order, keySort) => {
-    this.setState({posts: sortItemsBy(this.props.posts, order, keySort)});
+    this.setState({posts: sortItemsBy(keySort, this.props.posts, order)});
   }
 
   render() {

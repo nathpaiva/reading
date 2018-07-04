@@ -16,7 +16,7 @@ function posts(state = [], action) {
     case LIST_POSTS:
       const posts = action.posts;
 
-      const voteScoreSorted = sortItemsBy(posts, 'bigger', 'voteScore');
+      const voteScoreSorted = sortItemsBy('voteScore', posts, 'smaller');
 
       return voteScoreSorted;
     default:
@@ -31,7 +31,7 @@ function comments(state = [], action) {
 
       const commentsScoreSorted = comments.filter(comment => !comments.deleted)
 
-      return sortItemsBy(commentsScoreSorted, 'smaller', 'voteScore');
+      return sortItemsBy('voteScore', commentsScoreSorted, 'bigger');
     default:
       return state;
   }

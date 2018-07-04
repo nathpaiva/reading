@@ -4,7 +4,7 @@ export function capitalize (str = '') {
     : str[0].toUpperCase() + str.slice(1)
 }
 
-export function sortItemsBy (posts = [], order = 'smaller', keySort) {
+export function sortItemsBy (keySort, posts = [], order = 'smaller') {
   const newPost = posts.sort((a, b) => {
     if (order === 'bigger') {
       return b[keySort] - a[keySort]
