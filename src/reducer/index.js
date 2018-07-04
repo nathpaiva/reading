@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, POST_DETAIL } from '../actions';
+import { sortItemsBy } from '../utils/helpers'
 
 function categories(state = [], action) {
   switch(action.type) {
@@ -15,16 +16,7 @@ function posts(state = [], action) {
     case LIST_POSTS:
       const posts = action.posts;
 
-      const voteScoreSorted = posts.sort((a, b) => {
-        if (a.voteScore > b.voteScore) {
-          return 1;
-        }
-        if (a.voteScore < b.voteScore) {
-          return -1;
-        }
-        // a must be equal to b
-        return 0;
-      });
+      const voteScoreSorted = sortItemsBy(posts, 'bigger', 'voteScore');
 
       return voteScoreSorted;
     default:
@@ -37,18 +29,9 @@ function comments(state = [], action) {
     case POST_COMMENTS:
       const comments = action.comments;
 
-      const commentsScoreSorted = comments.filter(comment => !comments.deleted).sort((a, b) => {
-        if (a.voteScore < b.voteScore) {
-          return 1;
-        }
-        if (a.voteScore > b.voteScore) {
-          return -1;
-        }
-        // a must be equal to b
-        return 0;
-      });
+      const commentsScoreSorted = comments.filter(comment => !comments.deleted)
 
-      return commentsScoreSorted;
+      return sortItemsBy(commentsScoreSorted, 'smaller', 'voteScore');
     default:
       return state;
   }

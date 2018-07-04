@@ -5,6 +5,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import { getPosts } from '../api';
+import { sortItemsBy } from '../utils/helpers';
 import Post from './Post';
 
 class Home extends Component {
@@ -18,16 +19,7 @@ class Home extends Component {
   };
 
   orderBy = (order, keySort) => {
-    const newPost = this.props.posts.sort((a, b) => {
-      if (order === 'bigger') {
-        return b[keySort] - a[keySort]
-      }
-
-      return a[keySort] - b[keySort]
-    });
-
-
-    this.setState({posts: newPost});
+    this.setState({posts: sortItemsBy(this.props.posts, order, keySort)});
   }
 
   render() {
