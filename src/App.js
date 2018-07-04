@@ -14,7 +14,8 @@ import Home from './components/Home';
 import Category from './components/Category';
 import { getCategories } from './api';
 import AddPost from './components/AddPost';
-import Comments from './components/Comments';
+import PostPage from './components/PostPage';
+import EditPost from './components/EditPost';
 
 class App extends Component {
   state = {
@@ -42,9 +43,10 @@ class App extends Component {
           <MenuCategory categories={this.props.categories} />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path="/categoria/:id?" component={Category} />
+            <Route exact path="/categoria/:id" component={Category} />
             <Route exact path="/add-post" component={AddPost} />
-            <Route exact path="/post/:id" component={Comments} />
+            <Route exact path="/post/:id" component={PostPage} />
+            <Route exact path="/post/edit/:id" component={EditPost} />
           </Switch>
         </div>
 

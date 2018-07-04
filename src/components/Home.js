@@ -5,6 +5,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import { getPosts } from '../api';
+import Post from './Post';
 
 class Home extends Component {
 
@@ -37,24 +38,13 @@ class Home extends Component {
           <ArrowDropDownIcon onClick={() => this.orderBy('smaller', 'voteScore')} />
         </li>
 
-        {this.props.posts.map(post => (
-          <li key={post.id}>
-            <div>Autor: {post.author}</div>
-            <div>Título: {post.title}</div>
-            <div>Descrição: {post.body}</div>
-            <div>Category: {post.category}</div>
-            <div>Comentários: {post.commentCount}</div>
-            <Link to={`post/${post.id}`}>Ver mais</Link>
-          </li>
-        ))}
+        <Post posts={this.props.posts} readmore={true} />
       </ul>
     );
   }
 }
 
 function mapStateToProps({categories, posts}) {
-  console.log('​mapStateToProps -> posts', posts);
-  console.log("categories", categories);
   return {
     categories,
     posts
