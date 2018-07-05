@@ -6,11 +6,17 @@ import Button from '@material-ui/core/Button';
 import { getCommentsById, getPostById } from '../api';
 import Comment from './Comment';
 import Post from './Post';
+import CommentForm from './CommentForm';
 
 class PostPage extends Component {
   componentDidMount() {
     this.props.loadComments(this.props.match.params.id);
     this.props.loadPost(this.props.match.params.id);
+  }
+
+  handlerSubmit = (data) => {
+    console.log('​PostPage -> handlerSubmit -> data', data);
+    console.log("veio");
   }
 
   render() {
@@ -20,7 +26,9 @@ class PostPage extends Component {
         <Button variant="contained" color="secondary">Remove post</Button>
         <Link to={`/post/edit/${this.props.post.id}`}>Edit post</Link>
         <div>
-          <Link to={`/post/create/${this.props.post.id}`}>Create comment</Link>
+          <button>Create comment</button>
+          {console.log("this.props.post.id", this.props.post)};
+          {this.props.post.id && <CommentForm handlerSubmit={this.handlerSubmit} postId={this.props.post.id} />}
           <Comment comments={this.props.comments} />
         </div>
       </div>
@@ -29,6 +37,7 @@ class PostPage extends Component {
 }
 
 function mapStateToProps({post, comments}) {
+  console.log("post", post);
   return {
     post,
     comments
