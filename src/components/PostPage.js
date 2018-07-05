@@ -27,7 +27,6 @@ class PostPage extends Component {
         <Link to={`/post/edit/${this.props.post.id}`}>Edit post</Link>
         <div>
           <button>Create comment</button>
-          {console.log("this.props.post.id", this.props.post)};
           {this.props.post.id && <CommentForm handlerSubmit={this.handlerSubmit} postId={this.props.post.id} />}
           <Comment comments={this.props.comments} />
         </div>
