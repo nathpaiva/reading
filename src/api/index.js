@@ -31,7 +31,7 @@ export function getPostById(id) {
 }
 
 export function postComment(data) {
-  data.id = `${data.parentId}&${Date.now()}`;
+  data.id = `${data.parentId}new${Date.now()}`;
   data.timestamp = Date.now();
 
   return dispatch => fetchAPI(`${url}/comments`, {
@@ -49,7 +49,7 @@ export function deleteComment(id) {
 }
 
 export function createPost(data) {
-  data.id = `${data.parentId}&${Date.now()}`;
+  data.id = `new${Date.now()}`;
   data.timestamp = Date.now();
 
   return dispatch => fetchAPI(`${url}/posts`, {
