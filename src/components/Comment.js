@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Comment = ({ comments }) => (
+const Comment = ({ comments, handlerDelete }) => (
   <div>
     {comments.length > 0 && <h1>Comentários</h1>}
     {comments.map(comment => (
@@ -8,6 +8,7 @@ const Comment = ({ comments }) => (
         <h2>Author: {comment.author}</h2>
         <div>Comentario: {comment.body}</div>
         <div>Votos: {comment.voteScore}</div>
+        <button onClick={() => handlerDelete(comment.id)}>Delete comment</button>
       </li>
     ))}
   </div>

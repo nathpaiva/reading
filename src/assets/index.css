@@ -12,7 +12,12 @@ li {
   list-style: none;
   margin-left: 10px;
 }
-
+.show{
+  display: block;
+}
+.hidden {
+  display: none;
+}
 #root,
 .App {
   height: 100%;

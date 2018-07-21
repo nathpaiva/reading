@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, POST_DETAIL } from '../actions';
+import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, POST_DETAIL, NEW_POST_COMMENTS, DELETE_COMMENTS } from '../actions';
 import { sortItemsBy } from '../utils/helpers'
 
 function categories(state = [], action) {
@@ -24,14 +24,24 @@ function posts(state = [], action) {
   }
 }
 
+function filterDD(comments) {
+  return comments.filter(comment => !comment.deleted);
+}
+
 function comments(state = [], action) {
+  const { comments } = action;
+
   switch(action.type) {
+    case NEW_POST_COMMENTS:
+
+      return sortItemsBy('voteScore', filterDD(state.concat(comments)), 'bigger');
+    case DELETE_COMMENTS:
+
+      const newComments = [...state].map(comment => comment.id === comments.id ? comments : comment);
+      return sortItemsBy('voteScore', filterDD(newComments), 'bigger');
     case POST_COMMENTS:
-      const comments = action.comments;
 
-      const commentsScoreSorted = comments.filter(comment => !comments.deleted)
-
-      return sortItemsBy('voteScore', commentsScoreSorted, 'bigger');
+      return sortItemsBy('voteScore', filterDD(comments), 'bigger');
     default:
       return state;
   }

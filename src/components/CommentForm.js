@@ -4,7 +4,7 @@ class CommentForm extends Component {
   state = {
     author: '',
     body: '',
-    postId: this.props.postId,
+    parentId: this.props.postId,
   };
 
   handleInputChange = (event) => {
@@ -18,6 +18,7 @@ class CommentForm extends Component {
 
   onSubmitCompoent = (evt) => {
     evt.preventDefault();
+
     this.props.handlerSubmit(this.state);
   }
 
@@ -26,7 +27,7 @@ class CommentForm extends Component {
       <form className={this.props.config} onSubmit={this.onSubmitCompoent}>
         <input type="text" name="author" id="author" defaultValue={this.state.author} required onChange={this.handleInputChange} placeholder="Author" />
         <textarea name="body" id="body" cols="30" defaultValue={this.state.body} required onChange={this.handleInputChange} rows="10"></textarea>
-        <input type="text" name="postId" id="postId" defaultValue={this.state.postId} hidden disabled />
+        <input type="text" name="parentId" id="parentId" defaultValue={this.state.parentId} hidden disabled />
         <input onSubmit={this.onSubmitCompoent} type="submit" />
       </form>
     )
