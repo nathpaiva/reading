@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 
 import { getCommentsById, getPostById, postComment, deleteComment, editPost } from '../api';
 import Comment from './Comment';
@@ -65,19 +64,18 @@ class PostPage extends Component {
     ];
   }
 
+  renderPost = () => {
+    if (this.state.editPost) {
+      return <EditPost post={this.props.post} inputs={this.prepareInputs()} saveButton={this.savePost} cancelEditButton={this.editPost} />
+    }
+
+    return <Post posts={[this.props.post]} internal={true} editPost={this.editPost} removePost={this.removePost} />
+  }
+
   render() {
     return (
       <div>
-        {/* um component novo */}
-        {this.state.editPost && <EditPost post={this.props.post} inputs={this.prepareInputs()} />}
-        {this.state.editPost && <Button variant="contained" onClick={() => this.savePost()}>Save</Button>}
-        {this.state.editPost && <Button variant="contained" onClick={() => this.editPost()} color="secondary">Cancel</Button>}
-
-        {/* outro component novo */}
-        {!this.state.editPost && <Post posts={[this.props.post]} />}
-        {!this.state.editPost && <Button variant="contained" onClick={() => this.editPost()}>Edit post</Button>}
-        {!this.state.editPost && <Button variant="contained" color="secondary" onClick={() => this.removePost()}>Remove post</Button>}
-
+        {this.renderPost()}
 
         <div>
           <button onClick={this.handlerCreteComment}>Create comment</button>

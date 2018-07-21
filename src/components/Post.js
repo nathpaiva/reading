@@ -1,7 +1,8 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
-const Post = ({ posts, readmore }) => (
+const Post = ({ posts, readmore, internal, editPost, removePost }) => (
   <div>
     {posts.map(post => (
       <ul key={`post-${post.id}`}>
@@ -15,6 +16,11 @@ const Post = ({ posts, readmore }) => (
           {readmore && <Link to={`post/${post.id}`}>Ver mais</Link>}
       </ul>
     ))}
+
+    {internal && <div>
+      <Button variant="contained" onClick={() => editPost()}>Edit post</Button>
+      <Button variant="contained" color="secondary" onClick={() => removePost()}>Remove post</Button>
+    </div>}
   </div>
 );
 
