@@ -22,6 +22,10 @@ class Home extends Component {
     this.setState({posts: sortItemsBy(keySort, this.props.posts, order)});
   }
 
+  removePost = () => {
+    console.log("vai remover");
+  }
+
   render() {
     return (
       <ul className='posts'>
@@ -30,7 +34,7 @@ class Home extends Component {
           <ArrowDropDownIcon onClick={() => this.orderBy('smaller', 'voteScore')} />
         </li>
 
-        <Post posts={this.props.posts} readmore={true} />
+        <Post title='Todos os posts' posts={this.props.posts} internal={false} removePost={this.removePost} />
       </ul>
     );
   }
