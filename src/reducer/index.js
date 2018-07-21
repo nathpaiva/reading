@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, POST_DETAIL, NEW_POST_COMMENTS, DELETE_COMMENTS } from '../actions';
+import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, CREATE_POSTS, POST_DETAIL, NEW_POST_COMMENTS, DELETE_COMMENTS } from '../actions';
 import { sortItemsBy } from '../utils/helpers'
 
 function categories(state = [], action) {
@@ -18,6 +18,8 @@ function posts(state = [], action) {
       const voteScoreSorted = sortItemsBy('voteScore', posts, 'smaller');
 
       return voteScoreSorted;
+    case CREATE_POSTS:
+      return state.concat(action.posts);
     default:
       return state;
   }

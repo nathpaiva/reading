@@ -1,15 +1,9 @@
-import { listCategoies, listPosts, commentsById, postById, addCommentsById, deleteCommentsById } from '../actions';
+import { listCategoies, listPosts, commentsById, postById, addCommentsById, deleteCommentsById, createNewPost } from '../actions';
 
 const url = 'http://localhost:3001';
 const headers = {
   'Authorization': 'whatever-you-want',
   'Content-Type': 'application/json'
-};
-const post = data => {
-  return {
-    body: JSON.stringify(data),
-    method: 'post',
-  };
 };
 
 const fetchAPI = (url, options) => fetch(url, options)
@@ -49,7 +43,18 @@ export function postComment(data) {
 
 export function deleteComment(id) {
   return dispatch => fetchAPI(`${url}/comments/${id}`, {
-      headers,
-      method: 'delete',
-    }).then(comment => dispatch(deleteCommentsById(comment)))
+    headers,
+    method: 'delete',
+  }).then(comment => dispatch(deleteCommentsById(comment)))
+}
+
+export function createPost(data) {
+  data.id = `${data.parentId}&${Date.now()}`;
+  data.timestamp = Date.now();
+
+  return dispatch => fetchAPI(`${url}/posts`, {
+    headers,
+    body: JSON.stringify(data),
+    method: 'post',
+  }).then(posts => dispatch(createNewPost(posts)))
 }

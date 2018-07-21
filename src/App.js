@@ -1,34 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link, withRouter, Switch } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/Home';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import MenuCategory from './components/MenuCategory';
 import Home from './components/Home';
 import Category from './components/Category';
-import { getCategories } from './api';
+import { getCategories, createPost } from './api';
 import AddPost from './components/AddPost';
 import PostPage from './components/PostPage';
 import EditPost from './components/EditPost';
+import Message from './components/Message';
 
 class App extends Component {
   state = {
-    value: 'home',
+    showMessage: '',
   };
 
   componentDidMount() {
     this.props.loadCategories();
   }
 
-  render() {
-    const { value } = this.state;
+  createNewPost = (post) => {
+    this.props.createAPost(post);
+    this.setState({showMessage: 'Post adicionado com sucesso!!!'});
+    this.removeMessage();
+  }
 
+  removeMessage = () => {
+    setTimeout(() => {
+      this.setState({showMessage: ''});
+    }, 5000);
+  }
+
+  render() {
     return (
       <div className='App'>
         <AppBar position='static' color='primary'>
@@ -41,21 +48,17 @@ class App extends Component {
 
         <div className='container'>
           <MenuCategory categories={this.props.categories} />
+
+          {!!this.state.showMessage && <Message text={this.state.showMessage} />}
+
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path="/categoria/:id" component={Category} />
-            <Route exact path="/add-post" component={AddPost} />
+            <Route exact path="/add-post" render={props => <AddPost createNewPost={this.createNewPost} categories={this.props.categories} />} />
             <Route exact path="/post/:id" component={PostPage} />
             <Route exact path="/post/edit/:id" component={EditPost} />
           </Switch>
         </div>
-
-        <BottomNavigation value={value} onChange={this.handleChange} className='navigation' showLabels>
-          <BottomNavigationAction label="Home" value="home" component={Link} to="/"
-            icon={<HomeIcon />} />
-          <BottomNavigationAction label="New Post" value="New Post" component={Link} to="/add-post"
-            icon={<AddCircleOutlineIcon />} />
-        </BottomNavigation>
       </div>
     );
   }
@@ -71,7 +74,10 @@ function mapDispatchToProps(dispatch) {
   return {
     loadCategories: () => {
       dispatch(getCategories())
-    }
+    },
+    createAPost: (data) => {
+      dispatch(createPost(data));
+    },
   }
 }
 
