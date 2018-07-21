@@ -11,10 +11,9 @@ class CommentForm extends Component {
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
 
     this.setState({
-      [name]: value
+      [target.name]: value
     });
   }
 
@@ -25,9 +24,9 @@ class CommentForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmitCompoent}>
-        <input type="text" name="author" id="author" defaultValue={this.state.author} onChange={this.handleInputChange} placeholder="Author" />
-        <textarea name="body" id="body" cols="30" defaultValue={this.state.body} onChange={this.handleInputChange} rows="10"></textarea>
+      <form className={this.props.config} onSubmit={this.onSubmitCompoent}>
+        <input type="text" name="author" id="author" defaultValue={this.state.author} required onChange={this.handleInputChange} placeholder="Author" />
+        <textarea name="body" id="body" cols="30" defaultValue={this.state.body} required onChange={this.handleInputChange} rows="10"></textarea>
         <input type="text" name="postId" id="postId" defaultValue={this.state.postId} hidden disabled />
         <input onSubmit={this.onSubmitCompoent} type="submit" />
       </form>
