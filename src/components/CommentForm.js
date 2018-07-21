@@ -7,7 +7,6 @@ class CommentForm extends Component {
     postId: this.props.postId,
   };
 
-
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
