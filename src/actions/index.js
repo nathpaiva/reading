@@ -1,6 +1,7 @@
 export const LIST_CATEGORIES = 'LIST_CATEGORIES';
 export const LIST_POSTS = 'LIST_POSTS';
 export const CREATE_POSTS = 'CREATE_POSTS';
+export const EDIT_POSTS = 'EDIT_POSTS';
 export const POST_COMMENTS = 'POST_COMMENTS';
 export const POST_DETAIL = 'POST_DETAIL';
 export const NEW_POST_COMMENTS = 'NEW_POST_COMMENTS';
@@ -19,6 +20,11 @@ export const listPosts = posts => ({
 export const createNewPost = posts => ({
   type: CREATE_POSTS,
   posts,
+});
+
+export const editAPost = post => ({
+  type: EDIT_POSTS,
+  post,
 });
 
 export const postById = post => ({

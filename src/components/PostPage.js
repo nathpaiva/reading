@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 
-import { getCommentsById, getPostById, postComment, deleteComment } from '../api';
+import { getCommentsById, getPostById, postComment, deleteComment, editPost } from '../api';
 import Comment from './Comment';
 import Post from './Post';
 import CommentForm from './CommentForm';
@@ -33,8 +33,12 @@ class PostPage extends Component {
   }
 
   savePost = () => {
-    console.log("vai salvar o post e fechar tudo!");
-    console.log("this.author", this.author.value);
+    const data = {
+      title: this.title.value,
+      body: this.body.value,
+    };
+
+    this.props.editAPost(data, this.props.post.id);
     this.editPost();
   }
 
@@ -44,13 +48,6 @@ class PostPage extends Component {
 
   prepareInputs = () => {
     return [
-      {
-        type: 'text',
-        id: 'author',
-        text: 'author',
-        defaultValue: this.props.post.author,
-        inputRef: (input) => this.author = input
-      },
       {
         type: 'text',
         id: 'title',
@@ -113,6 +110,9 @@ function mapDispatchToProps(dispatch) {
     deleteAcomment: (data) => {
       dispatch(deleteComment(data));
     },
+    editAPost: (data, id) => {
+      dispatch(editPost(data, id));
+    }
   }
 }
 
