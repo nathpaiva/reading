@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, CREATE_POSTS, POST_DETAIL, NEW_POST_COMMENTS, DELETE_COMMENTS, EDIT_POSTS } from '../actions';
+import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, CREATE_POSTS, POST_DETAIL, NEW_POST_COMMENTS, DELETE_COMMENTS, EDIT_POSTS, DELETE_POST } from '../actions';
 import { sortItemsBy } from '../utils/helpers'
 
 function categories(state = [], action) {
@@ -54,6 +54,8 @@ function post(state = [], action) {
     case POST_DETAIL:
       return post;
     case EDIT_POSTS:
+      return post;
+    case DELETE_POST:
       return post;
     default:
       return state;

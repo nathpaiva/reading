@@ -1,4 +1,4 @@
-import { listCategoies, listPosts, commentsById, postById, addCommentsById, deleteCommentsById, createNewPost, editAPost } from '../actions';
+import { listCategoies, listPosts, commentsById, postById, addCommentsById, deleteCommentsById, createNewPost, editAPost, deletePostById } from '../actions';
 
 const url = 'http://localhost:3001';
 const headers = {
@@ -65,4 +65,11 @@ export function editPost(data, id) {
     body: JSON.stringify(data),
     method: 'put',
   }).then(posts => dispatch(editAPost(posts)))
+}
+
+export function deletePost(id) {
+  return dispatch => fetchAPI(`${url}/posts/${id}`, {
+    headers,
+    method: 'delete',
+  }).then(comment => dispatch(deletePostById(comment)))
 }

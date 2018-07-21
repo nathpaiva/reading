@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getCommentsById, getPostById, postComment, deleteComment, editPost } from '../api';
+import { getCommentsById, getPostById, postComment, deleteComment, editPost, deletePost } from '../api';
 import Comment from './Comment';
 import Post from './Post';
 import CommentForm from './CommentForm';
@@ -43,7 +43,11 @@ class PostPage extends Component {
 
   editPost = () => this.setState({ editPost: !this.state.editPost });
 
-  removePost = () => console.log("vai remover aqui");
+  removePost = () => {
+    console.log("veio 123");
+
+    this.props.deletePost(this.props.post.id);
+  };
 
   prepareInputs = () => {
     return [
@@ -110,6 +114,9 @@ function mapDispatchToProps(dispatch) {
     },
     editAPost: (data, id) => {
       dispatch(editPost(data, id));
+    },
+    deletePost: (id) => {
+      dispatch(deletePost(id));
     }
   }
 }

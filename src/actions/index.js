@@ -4,6 +4,7 @@ export const CREATE_POSTS = 'CREATE_POSTS';
 export const EDIT_POSTS = 'EDIT_POSTS';
 export const POST_COMMENTS = 'POST_COMMENTS';
 export const POST_DETAIL = 'POST_DETAIL';
+export const DELETE_POST = 'DELETE_POST';
 export const NEW_POST_COMMENTS = 'NEW_POST_COMMENTS';
 export const DELETE_COMMENTS = 'DELETE_COMMENTS';
 
@@ -29,6 +30,11 @@ export const editAPost = post => ({
 
 export const postById = post => ({
   type: POST_DETAIL,
+  post,
+});
+
+export const deletePostById = post => ({
+  type: DELETE_POST,
   post,
 });
 
