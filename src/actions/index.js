@@ -15,6 +15,11 @@ export const listPosts = posts => ({
   posts,
 });
 
+export const postById = post => ({
+  type: POST_DETAIL,
+  post,
+});
+
 export const commentsById = comments => ({
   type: POST_COMMENTS,
   comments,
@@ -30,7 +35,3 @@ export const deleteCommentsById = comments => ({
   comments,
 });
 
-export const postById = post => ({
-  type: POST_DETAIL,
-  post,
-});

@@ -15,7 +15,6 @@ function posts(state = [], action) {
   switch(action.type) {
     case LIST_POSTS:
       const posts = action.posts;
-
       const voteScoreSorted = sortItemsBy('voteScore', posts, 'smaller');
 
       return voteScoreSorted;
