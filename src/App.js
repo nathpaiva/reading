@@ -11,7 +11,6 @@ import Category from './components/Category';
 import { getCategories, createPost } from './api';
 import AddPost from './components/AddPost';
 import PostPage from './components/PostPage';
-import EditPost from './components/EditPost';
 import Message from './components/Message';
 
 class App extends Component {
@@ -56,7 +55,6 @@ class App extends Component {
             <Route exact path="/categoria/:id" component={Category} />
             <Route exact path="/add-post" render={props => <AddPost createNewPost={this.createNewPost} categories={this.props.categories} />} />
             <Route exact path="/post/:id" component={PostPage} />
-            <Route exact path="/post/edit/:id" component={EditPost} />
           </Switch>
         </div>
       </div>
