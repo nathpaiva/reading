@@ -19,9 +19,7 @@ class PostPage extends Component {
   }
 
   handlerSubmit = (data) => {
-    console.log('​PostPage -> handlerSubmit -> data', data);
     this.props.postAcomment(data);
-    // if sucess
     this.handlerCreteComment();
   }
 
@@ -30,7 +28,6 @@ class PostPage extends Component {
   changeClass = () => this.state.showForm ? 'show' : 'hidden';
 
   handlerDelete = (commentId) => {
-    console.log('​PostPage -> handlerDelete -> commentId', commentId);
     this.props.deleteAcomment(commentId);
   }
 
