@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Post = ({ title, posts, internal, editPost, removePost }) => (
   <div>
@@ -25,5 +26,13 @@ const Post = ({ title, posts, internal, editPost, removePost }) => (
     </div>}
   </div>
 );
+
+Post.propTypes = {
+  title: PropTypes.string,
+  posts: PropTypes.array.isRequired,
+  internal: PropTypes.bool.isRequired,
+  editPost: PropTypes.func,
+  removePost: PropTypes.func,
+};
 
 export default Post;

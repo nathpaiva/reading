@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { getCategoryById, deletePost } from '../api';
 import Post from './Post';
@@ -46,5 +47,12 @@ function mapDispatchToProps(dispatch) {
     }
   }
 }
+
+Category.propTypes = {
+  posts: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired,
+  loadCategory: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Category));

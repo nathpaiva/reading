@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import PropTypes from 'prop-types';
 
 import { getPosts, deletePost } from '../api';
 import { sortItemsBy } from '../utils/helpers';
@@ -57,5 +58,11 @@ function mapDispatchToProps(dispatch) {
     }
   }
 }
+
+Home.propTypes = {
+  posts: PropTypes.array.isRequired,
+  loadPosts: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

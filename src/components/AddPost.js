@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddPost extends Component {
   state = {
@@ -48,5 +49,9 @@ class AddPost extends Component {
     );
   }
 }
+
+AddPost.propTypes = {
+  categories: PropTypes.array.isRequired,
+};
 
 export default AddPost;

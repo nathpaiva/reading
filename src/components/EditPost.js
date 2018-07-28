@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 
 const EditPost = ({inputs, saveButton, cancelEditButton}) => {
   return (
@@ -21,6 +22,12 @@ const EditPost = ({inputs, saveButton, cancelEditButton}) => {
       <Button variant="contained" onClick={() => cancelEditButton()} color="secondary">Cancel</Button>
     </div>
   )
+};
+
+EditPost.propTypes = {
+  inputs: PropTypes.array.isRequired,
+  saveButton: PropTypes.func.isRequired,
+  cancelEditButton: PropTypes.func.isRequired,
 };
 
 export default EditPost;

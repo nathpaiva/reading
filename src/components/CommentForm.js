@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class CommentForm extends Component {
   state = {
@@ -33,5 +34,11 @@ class CommentForm extends Component {
     )
   }
 }
+
+CommentForm.propTypes = {
+  postId: PropTypes.string.isRequired,
+  config: PropTypes.string.isRequired,
+  handlerSubmit: PropTypes.func.isRequired,
+};
 
 export default CommentForm

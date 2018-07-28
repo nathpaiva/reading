@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const MenuCategory = ({categories}) => {
   return (
@@ -14,5 +15,9 @@ const MenuCategory = ({categories}) => {
     </ul>
   );
 }
+
+MenuCategory.propTypes = {
+  categories: PropTypes.array.isRequired,
+};
 
 export default MenuCategory;

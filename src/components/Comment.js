@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Comment = ({ comments, handlerDelete }) => (
   <div>
@@ -13,5 +14,10 @@ const Comment = ({ comments, handlerDelete }) => (
     ))}
   </div>
 );
+
+Comment.propTypes = {
+  comments: PropTypes.array.isRequired,
+  handlerDelete: PropTypes.func.isRequired,
+};
 
 export default Comment;

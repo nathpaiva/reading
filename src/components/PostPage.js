@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { getCommentsById, getPostById, postComment, deleteComment, editPost } from '../api';
 import Comment from './Comment';
@@ -113,5 +114,14 @@ function mapDispatchToProps(dispatch) {
     }
   }
 }
+
+PostPage.propTypes = {
+  comments: PropTypes.array.isRequired,
+  loadComments: PropTypes.func.isRequired,
+  loadPost: PropTypes.func.isRequired,
+  postAcomment: PropTypes.func.isRequired,
+  deleteAcomment: PropTypes.func.isRequired,
+  editAPost: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostPage);
