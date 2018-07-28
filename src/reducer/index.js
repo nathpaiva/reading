@@ -1,5 +1,15 @@
 import { combineReducers } from 'redux';
-import { LIST_CATEGORIES, LIST_POSTS, POST_COMMENTS, CREATE_POSTS, POST_DETAIL, NEW_POST_COMMENTS, DELETE_COMMENTS, EDIT_POSTS, DELETE_POST } from '../actions';
+import {
+  LIST_CATEGORIES,
+  LIST_POSTS,
+  POSTS_COMMENTS,
+  CREATE_POSTS,
+  POSTS_DETAIL,
+  NEW_POSTS_COMMENTS,
+  DELETE_COMMENTS,
+  EDIT_POSTS,
+  DELETE_POST
+} from '../actions';
 import { sortItemsBy } from '../utils/helpers'
 
 function categories(state = [], action) {
@@ -16,10 +26,23 @@ function posts(state = [], action) {
     case LIST_POSTS:
       const posts = action.posts;
       const voteScoreSorted = sortItemsBy('voteScore', posts, 'smaller');
-
       return voteScoreSorted;
     case CREATE_POSTS:
       return state.concat(action.posts);
+    case POSTS_DETAIL:
+      return state.concat(action.posts);
+    case EDIT_POSTS:
+      return state.concat(action.posts);
+    case DELETE_POST:
+      const posts2 = state.map(post => {
+        if (action.posts.id === post.id) {
+          post.deleted = action.posts.deleted;
+        }
+
+        return post;
+      });
+
+      return posts2;
     default:
       return state;
   }
@@ -33,30 +56,16 @@ function comments(state = [], action) {
   const { comments } = action;
 
   switch(action.type) {
-    case NEW_POST_COMMENTS:
+    case NEW_POSTS_COMMENTS:
 
       return sortItemsBy('voteScore', filterDD(state.concat(comments)), 'bigger');
     case DELETE_COMMENTS:
 
       const newComments = [...state].map(comment => comment.id === comments.id ? comments : comment);
       return sortItemsBy('voteScore', filterDD(newComments), 'bigger');
-    case POST_COMMENTS:
+    case POSTS_COMMENTS:
 
       return sortItemsBy('voteScore', filterDD(comments), 'bigger');
-    default:
-      return state;
-  }
-}
-
-function post(state = [], action) {
-  const { post } = action;
-  switch(action.type) {
-    case POST_DETAIL:
-      return post;
-    case EDIT_POSTS:
-      return post;
-    case DELETE_POST:
-      return post;
     default:
       return state;
   }
@@ -66,5 +75,4 @@ export default combineReducers({
   categories,
   posts,
   comments,
-  post
 });

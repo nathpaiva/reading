@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { getCategoryById } from '../api';
+import { getCategoryById, deletePost } from '../api';
 import Post from './Post';
 
 class Category extends Component {
@@ -17,7 +17,9 @@ class Category extends Component {
     }
   }
 
-  removePost = () => console.log("veio vai deletar");
+  removePost = (id) => {
+    this.props.deletePost(id);
+  };
 
   render() {
     return(
@@ -38,6 +40,9 @@ function mapDispatchToProps(dispatch) {
   return {
     loadCategory: (id) => {
       dispatch(getCategoryById(id))
+    },
+    deletePost: (id) => {
+      dispatch(deletePost(id));
     }
   }
 }

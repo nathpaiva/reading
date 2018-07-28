@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Post = ({ title, posts, internal, editPost, removePost }) => (
   <div>
     {!!title && <h1>{title}</h1>}
-    {posts.map(post => (
+    {posts.filter(post => !post.deleted ).map(post => (
       <ul key={`post-${post.id}`}>
           <li>Autor: {post.author}</li>
           <li>Título: {post.title}</li>
@@ -15,15 +15,13 @@ const Post = ({ title, posts, internal, editPost, removePost }) => (
           <li>Comentários: {post.commentCount}</li>
           <li>{!internal && <div>
             <Link to={`/post/${post.id}`}>Ver mais</Link>
-            <Button variant="contained" color="secondary" onClick={() => removePost()}>Remove post</Button>
+            <Button variant="contained" color="secondary" onClick={() => removePost(post.id)}>Remove post</Button>
           </div>}</li>
-
       </ul>
     ))}
 
     {internal && <div>
       <Button variant="contained" onClick={() => editPost()}>Edit post</Button>
-      <Button variant="contained" color="secondary" onClick={() => removePost()}>Remove post</Button>
     </div>}
   </div>
 );

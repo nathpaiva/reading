@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getCommentsById, getPostById, postComment, deleteComment, editPost, deletePost } from '../api';
+import { getCommentsById, getPostById, postComment, deleteComment, editPost } from '../api';
 import Comment from './Comment';
 import Post from './Post';
 import CommentForm from './CommentForm';
@@ -43,12 +43,6 @@ class PostPage extends Component {
 
   editPost = () => this.setState({ editPost: !this.state.editPost });
 
-  removePost = () => {
-    console.log("veio 123");
-
-    this.props.deletePost(this.props.post.id);
-  };
-
   prepareInputs = () => {
     return [
       {
@@ -73,7 +67,7 @@ class PostPage extends Component {
       return <EditPost post={this.props.post} inputs={this.prepareInputs()} saveButton={this.savePost} cancelEditButton={this.editPost} />
     }
 
-    return <Post posts={[this.props.post]} internal={true} editPost={this.editPost} removePost={this.removePost} />
+    return <Post posts={[this.props.post]} internal={true} editPost={this.editPost} />
   }
 
   render() {
@@ -91,7 +85,9 @@ class PostPage extends Component {
   }
 }
 
-function mapStateToProps({post, comments}) {
+function mapStateToProps({posts, comments}) {
+  const post = !!posts.length ? posts[0] : posts;
+
   return {
     post,
     comments
@@ -114,9 +110,6 @@ function mapDispatchToProps(dispatch) {
     },
     editAPost: (data, id) => {
       dispatch(editPost(data, id));
-    },
-    deletePost: (id) => {
-      dispatch(deletePost(id));
     }
   }
 }

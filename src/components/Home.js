@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import { getPosts } from '../api';
+import { getPosts, deletePost } from '../api';
 import { sortItemsBy } from '../utils/helpers';
 import Post from './Post';
 
@@ -22,9 +22,9 @@ class Home extends Component {
     this.setState({posts: sortItemsBy(keySort, this.props.posts, order)});
   }
 
-  removePost = () => {
-    console.log("vai remover");
-  }
+  removePost = (id) => {
+    this.props.deletePost(id);
+  };
 
   render() {
     return (
@@ -51,6 +51,9 @@ function mapDispatchToProps(dispatch) {
   return {
     loadPosts: () => {
       dispatch(getPosts())
+    },
+    deletePost: (id) => {
+      dispatch(deletePost(id));
     }
   }
 }

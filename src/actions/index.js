@@ -2,10 +2,10 @@ export const LIST_CATEGORIES = 'LIST_CATEGORIES';
 export const LIST_POSTS = 'LIST_POSTS';
 export const CREATE_POSTS = 'CREATE_POSTS';
 export const EDIT_POSTS = 'EDIT_POSTS';
-export const POST_COMMENTS = 'POST_COMMENTS';
-export const POST_DETAIL = 'POST_DETAIL';
+export const POSTS_COMMENTS = 'POSTS_COMMENTS';
+export const POSTS_DETAIL = 'POSTS_DETAIL';
 export const DELETE_POST = 'DELETE_POST';
-export const NEW_POST_COMMENTS = 'NEW_POST_COMMENTS';
+export const NEW_POSTS_COMMENTS = 'NEW_POSTS_COMMENTS';
 export const DELETE_COMMENTS = 'DELETE_COMMENTS';
 
 export const listCategoies = categories => ({
@@ -23,28 +23,28 @@ export const createNewPost = posts => ({
   posts,
 });
 
-export const editAPost = post => ({
+export const editAPost = posts => ({
   type: EDIT_POSTS,
-  post,
+  posts,
 });
 
-export const postById = post => ({
-  type: POST_DETAIL,
-  post,
+export const postById = posts => ({
+  type: POSTS_DETAIL,
+  posts,
 });
 
-export const deletePostById = post => ({
+export const deletePostById = posts => ({
   type: DELETE_POST,
-  post,
+  posts,
 });
 
 export const commentsById = comments => ({
-  type: POST_COMMENTS,
+  type: POSTS_COMMENTS,
   comments,
 });
 
 export const addCommentsById = comments => ({
-  type: NEW_POST_COMMENTS,
+  type: NEW_POSTS_COMMENTS,
   comments,
 });
 
